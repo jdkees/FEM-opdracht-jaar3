@@ -16,4 +16,4 @@ En dan het commando:
 
 git push
 
-En dat is alles. Succes!
+Voer je gebruikernaam in en wachtwoord. Succes!
