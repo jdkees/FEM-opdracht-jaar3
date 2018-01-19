@@ -1,6 +1,6 @@
 # FEM-opdracht-jaar3
 
-Dit is de GitHib voor ons project. Wanneer je begint altijd het commando uitvoeren:
+Dit is de GitHub voor ons project. Wanneer je begint altijd het commando uitvoeren:
 
 git pull
 
