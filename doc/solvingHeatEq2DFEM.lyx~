@@ -78,14 +78,20 @@ Weak Formulation of the 2D-Heat Equation
 Jan Dezider Kees Koomen & Uri Cohen
 \end_layout
 
+\begin_layout Section
+The Time-Dependent Heat Equation
+\end_layout
+
 \begin_layout Standard
+\noindent
+\align left
 The 2D-heat equation we want to rewrite into weak form will be
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-c_{1}\frac{\partial^{2}T}{\partial t^{2}}=c_{2}\frac{\partial^{2}T}{\partial x^{2}}+c_{3}\frac{\partial^{2}T}{\partial y^{2}}
+c_{1}\frac{\partial T}{\partial t}=c_{2}\frac{\partial^{2}T}{\partial x^{2}}+c_{3}\frac{\partial^{2}T}{\partial y^{2}}
 \]
 
 \end_inset
@@ -105,8 +111,751 @@ with
  as constants which will be evaluated later on.
  This form of the time-dependent heat equations governs only the heat conduction
  in the object.
- Thus no radiation into the surroundings and internal heat generation.
+ Thus no radiation into the surroundings and no internal heat generation.
+ The temperature 
+\begin_inset Formula $T$
+\end_inset
+
+ is written as the product of the shape function matrix 
+\begin_inset Formula $\mathbf{N}(x,\,y)$
+\end_inset
+
+ multiplied by the coefficient matrix 
+\begin_inset Formula $\phi^{(e)}(t)$
+\end_inset
+
+ which contains the temperature on the nodes of the element as a function
+ of time.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+T^{(e)}=\mathbf{N}(x,\,y)\cdot\phi^{(e)}(t)\label{eq:NtimePhi}
+\end{equation}
+
+\end_inset
+
+Next we apply the Galerkin Method to rewrite the partial differential equation
+ into weak form.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int\mathbf{N}^{T}\cdot\left(c_{1}\frac{\partial T}{\partial t}-c_{2}\frac{\partial^{2}T}{\partial x^{2}}-c_{3}\frac{\partial^{2}T}{\partial y^{2}}\right)\,dA
+\]
+
+\end_inset
+
+Substituting formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:NtimePhi"
+
+\end_inset
+
+ into equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Galerkin"
+
+\end_inset
+
+ gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+c_{1}\int\mathbf{N}^{T}\frac{\partial\phi^{(e)}}{\partial t}\mathbf{N}\,dA-c_{2}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}\phi^{(e)}\,dA-c_{3}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial y^{2}}\phi^{(e)}\,dA\label{eq:Galerkin}
+\end{equation}
+
+\end_inset
+
+In the following section we will be evaluating every term in this equation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The time derivative
+\end_layout
+
+\begin_layout Standard
+We start by rewriting the first term of equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Galerkin"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\mathbf{C}^{(e)}\dot{\phi}^{(e)} & =c_{1}\int\mathbf{N}^{T}\frac{\partial\phi^{(e)}}{\partial t}\mathbf{N}\,dA\\
+ & =\left(c_{1}\int\mathbf{N}^{T}\mathbf{N}\,dA\right)\frac{\partial\phi^{(e)}}{\partial t}\\
+ & =\left(c_{1}\int\mathbf{N}^{T}\mathbf{N}\,dA\right)\dot{\phi}^{(e)}
+\end{alignat*}
+
+\end_inset
+
+We will be applying the finite difference method on the 
+\begin_inset Formula $\dot{\phi}^{(e)}$
+\end_inset
+
+ when having dealt with the spacial derivatives in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Galerkin"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+The Spacial Derivatives
+\end_layout
+
+\begin_layout Standard
+Since the second and third term of equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Galerkin"
+
+\end_inset
+
+ are identical, we will work out the derivative with respect to 
+\begin_inset Formula $x$
+\end_inset
+
+ and "copy" the resulting equation for the derivative with respect to 
+\begin_inset Formula $y$
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Standard
+We rewrite the second derivative in
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+-c_{2}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}\phi^{(e)}\,dA\label{eq:spaceIntegral}
+\end{equation}
+
+\end_inset
+
+by using the product rule of differentiation.
+ Thus
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}=\frac{\partial}{\partial x}\left(\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\right)-\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}
+\]
+
+\end_inset
+
+Substituting this result in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:spaceIntegral"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+-c_{2}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}\phi^{(e)}\,dA=-c_{2}\int\frac{\partial}{\partial x}\left(\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\right)\phi^{(e)}\,dA+c_{2}\int\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\,dA\label{eq:spaceIntegral2}
+\end{equation}
+
+\end_inset
+
+The first term in this expression can be rewritten using the divergence
+ theorem as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-c_{2}\int\frac{\partial}{\partial x}\left(\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\right)\phi^{(e)}\,dA=-c_{2}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta\,d\Gamma
+\]
+
+\end_inset
+
+Thus equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:spaceIntegral2"
+
+\end_inset
+
+ becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+-c_{2}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}\phi^{(e)}\,dA & =-c_{2}\int\frac{\partial}{\partial x}\left(\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\right)\phi^{(e)}\,dA+c_{2}\int\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\,dA\\
+ & =c_{2}\int\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\,dA-c_{2}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta\,d\Gamma
+\end{alignat*}
+
+\end_inset
+
+We can apply the same evaluating for the derivative with respect to 
+\begin_inset Formula $y$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{alignat*}{1}
+-c_{3}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial y^{2}}\phi^{(e)}\,dA & =-c_{3}\int\frac{\partial}{\partial y}\left(\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\right)\phi^{(e)}\,dA+c_{3}\int\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\,dA\\
+ & =c_{3}\int\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\,dA-c_{3}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma
+\end{alignat*}
+
+\end_inset
+
+Thus the second derivative for 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ become
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+-c_{2}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial x^{2}}\phi^{(e)}\,dA-c_{3}\int\mathbf{N}^{T}\frac{\partial^{2}\mathbf{N}}{\partial y^{2}}\phi^{(e)}\,dA & =c_{2}\int\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\,dA-c_{2}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta\,d\Gamma\\
+ & +c_{3}\int\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\,dA-c_{3}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
+\\
+ & =-\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
+ & +\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}
+\end{alignat*}
+
+\end_inset
+
+Writing it more compactly
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{\mathbf{b}^{(e)}}{-\underbrace{\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma}}+\underset{\mathbf{k}_{D}^{(e)}}{\underbrace{\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)}}\phi^{(e)}
+\]
+
+\end_inset
+
+Thus the 2D time-dependent heat equation in weak form becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\left(c_{1}\int\mathbf{N}^{T}\mathbf{N}\,dA\right)\dot{\phi}^{(e)}-\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
++\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}=0
+\end{alignat*}
+
+\end_inset
+
+and in matrix form
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{C}^{(e)}\dot{\phi}^{(e)}+\mathbf{k}_{D}^{(e)}\phi^{(e)}-\mathbf{b}^{(e)}=0\label{eq:matrixForm}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The boundary
+\end_layout
+
+\begin_layout Standard
+The matrix 
+\begin_inset Formula $\mathbf{b}^{(e)}$
+\end_inset
+
+ can be written as a matrix 
+\begin_inset Formula $\mathbf{b}_{I}^{(e)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{b}_{b}^{(e)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{b}^{(e)}=\mathbf{b}_{I}^{(e)}+\mathbf{b}_{b}^{(e)}
+\]
+
+\end_inset
+
+The 
+\begin_inset Formula $\mathbf{b}_{I}^{(e)}$
+\end_inset
+
+ matrix consist of elements which lying inside the object and 
+\begin_inset Formula $\mathbf{b}_{b}^{(e)}$
+\end_inset
+
+ of elements lying at the boundaries of the object.
+ We can ignore the 
+\begin_inset Formula $\mathbf{b}_{I}^{(e)}$
+\end_inset
+
+ matrix because evaluating the surface integral of adjacent elements cancel
+ each other out just like in the 1D case.
+ We are left with the 
+\begin_inset Formula $\mathbf{b}_{b}^{(e)}$
+\end_inset
+
+ matrix.
+ Recall that 
+\begin_inset Formula $\mathbf{b}^{(e)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{b}^{(e)}=\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma
+\]
+
+\end_inset
+
+using Fourier's heat convection formula, we can write this expression as
+\begin_inset Formula 
+\begin{alignat*}{1}
+\mathbf{b}^{(e)} & =\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
+ & =\int_{\Gamma}-h\phi_{b}+hT_{s}\,d\Gamma
+\end{alignat*}
+
+\end_inset
+
+with 
+\begin_inset Formula $\phi_{b}$
+\end_inset
+
+ being the temperature at the nodes of the boundary.
+ And 
+\begin_inset Formula $T_{s}$
+\end_inset
+
+ the temperature of the surrounding.
+ But, we will set 
+\begin_inset Formula $\mathbf{b}_{b}^{(e)}$
+\end_inset
+
+ to zero since the temperature on the boundary will be set equal to the
+ temperature of the heated metal with temperature 
+\begin_inset Formula $T_{m}$
+\end_inset
+
+ which will be placed on direct contact with the elements on the boundary.
+\end_layout
+
+\begin_layout Section
+Finite difference method
+\end_layout
+
+\begin_layout Standard
+The global matrix which will be assembled from the element matrices will
+ have the same form as equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:matrixForm"
+
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is a column matrix.
+ I will write 
+\begin_inset Formula $\phi$
+\end_inset
+
+ between curly brackets to avoid confusion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{C}\left\{ \dot{\phi}\right\} +\mathbf{k}_{D}\left\{ \phi\right\} -\mathbf{b}=0
+\]
+
+\end_inset
+
+As stated in the previous section, we set the boundary matrix equal to zero
+ thus
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{C}\left\{ \dot{\phi}\right\} +\mathbf{k}_{D}\left\{ \phi\right\} =0\label{eq:matrixForm2}
+\end{equation}
+
+\end_inset
+
+We approximate 
+\begin_inset Formula $\dot{\phi}$
+\end_inset
+
+ using the definition of the derivative.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \dot{\phi}\right\} \cong\frac{\left\{ \phi(t+\Delta t)\right\} -\left\{ \phi(t)\right\} }{\Delta t}
+\]
+
+\end_inset
+
+Thus equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:matrixForm2"
+
+\end_inset
+
+ becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{C}\frac{\left\{ \phi(t+\Delta t)\right\} -\left\{ \phi(t)\right\} }{\Delta t}+\mathbf{k}_{D}\left\{ \phi(t)\right\} =0
+\]
+
+\end_inset
+
+Rewriting for 
+\begin_inset Formula $\left\{ \phi(t+\Delta t)\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{C}\left\{ \phi(t+\Delta t)\right\} =-\mathbf{k}_{D}\left\{ \phi(t)\right\} \Delta t+\mathbf{C}\left\{ \phi(t)\right\} 
+\]
+
+\end_inset
+
+We need to know 
+\begin_inset Formula $\left\{ \phi(0)\right\} $
+\end_inset
+
+ which is known for our problem.
+ The temperature on the boundary is equal to 
+\begin_inset Formula $T_{m}$
+\end_inset
+
+ and for the elements inside the object, the temperature will be equal to
+ 
+\begin_inset Formula $37^{\circ}C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Shape functions and their derivatives
+\end_layout
+
+\begin_layout Standard
+In this project we will be using triangular elements with linear interpolation
+ functions.
+ These are given as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{N}(x,\,y)=\left[\begin{array}{ccc}
+N_{1} & N_{2} & N_{3}\end{array}\right]
+\]
+
+\end_inset
+
+with 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+N_{i} & =\frac{1}{2A^{(e)}}\left[c_{i}+a_{i}x+b_{i}y\right]\\
+N_{1} & =\frac{1}{2A^{(e)}}\left[\left(x_{2}y_{3}-x_{3}y_{2}\right)+\left(y_{2}-y_{3}\right)x+\left(x_{3}-x_{2}\right)y\right]\\
+N_{2} & =\frac{1}{2A^{(e)}}\left[\left(x_{3}y_{1}-x_{1}y_{3}\right)+\left(y_{3}-y_{1}\right)x+\left(x_{1}-x_{3}\right)y\right]\\
+N_{3} & =\frac{1}{2A^{(e)}}\left[\left(x_{1}y_{2}-x_{1}y_{1}\right)+\left(y_{1}-y_{2}\right)x+\left(x_{2}-x_{1}\right)y\right]
+\end{alignat*}
+
+\end_inset
+
+Thus the derivatives become
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\frac{\partial\mathbf{N}}{\partial x} & =\frac{1}{2A^{(e)}}\left[\begin{array}{ccc}
+a_{1} & a_{2} & a_{3}\end{array}\right]\\
+\frac{\partial\mathbf{N}}{\partial y} & =\frac{1}{2A^{(e)}}\left[\begin{array}{ccc}
+b_{1} & b_{2} & b_{3}\end{array}\right]\\
+\frac{\partial\mathbf{N}^{T}}{\partial x} & =\frac{1}{2A^{(e)}}\left[\begin{array}{c}
+a_{1}\\
+a_{2}\\
+a_{3}
+\end{array}\right]\\
+\frac{\partial\mathbf{N}^{T}}{\partial y} & =\frac{1}{2A^{(e)}}\left[\begin{array}{c}
+b_{1}\\
+b_{2}\\
+b_{3}
+\end{array}\right]
+\end{alignat*}
+
+\end_inset
+
+And the products
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x} & =\frac{1}{4\left(A^{(e)}\right)^{2}}\left[\begin{array}{c}
+a_{1}\\
+a_{2}\\
+a_{3}
+\end{array}\right]\left[\begin{array}{ccc}
+a_{1} & a_{2} & a_{3}\end{array}\right]=\frac{1}{4\left(A^{(e)}\right)^{2}}\left[\begin{array}{ccc}
+a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
+a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\
+a_{3}a_{1} & a_{3}a_{2} & a_{3}^{2}
+\end{array}\right]\\
+\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y} & =\frac{1}{4\left(A^{(e)}\right)^{2}}\left[\begin{array}{c}
+b_{1}\\
+b_{2}\\
+b_{3}
+\end{array}\right]\left[\begin{array}{ccc}
+b_{1} & b_{2} & b_{3}\end{array}\right]=\frac{1}{4\left(A^{(e)}\right)^{2}}\left[\begin{array}{ccc}
+b_{1}^{2} & b_{1}b_{2} & b_{1}b_{3}\\
+b_{2}b_{1} & b_{2}^{2} & b_{2}b_{3}\\
+b_{3}b_{1} & b_{3}b_{2} & b_{3}^{2}
+\end{array}\right]\\
+\mathbf{N}^{T}\mathbf{N} & =\left[\begin{array}{c}
+N_{1}\\
+N_{2}\\
+N_{3}
+\end{array}\right]\left[\begin{array}{ccc}
+N_{1} & N_{2} & N_{3}\end{array}\right]=\left[\begin{array}{ccc}
+N_{1}^{2} & N_{1}N_{2} & N_{1}N_{3}\\
+N_{2}N_{1} & N_{2}^{2} & N_{2}N_{3}\\
+N_{3}N_{1} & N_{3}N_{2} & N_{3}^{2}
+\end{array}\right]
+\end{alignat*}
+
+\end_inset
+
+We can evaluate 
+\begin_inset Formula $\mathbf{N}^{T}\mathbf{N}$
+\end_inset
+
+ using the formula
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{A}N_{1}^{m}N_{2}^{n}N_{3}^{p}\,dA=\frac{m!n!p!}{\left(m+n+p+2\right)!}2A
+\]
+
+\end_inset
+
+thus
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int\mathbf{N}^{T}\mathbf{N}\,dA=\left[\begin{array}{ccc}
+N_{1}^{2} & N_{1}N_{2} & N_{1}N_{3}\\
+N_{2}N_{1} & N_{2}^{2} & N_{2}N_{3}\\
+N_{3}N_{1} & N_{3}N_{2} & N_{3}^{2}
+\end{array}\right]=\frac{A}{12}\left[\begin{array}{ccc}
+2 & 1 & 1\\
+1 & 2 & 1\\
+1 & 1 & 2
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+In conclusion
+\end_layout
+
+\begin_layout Standard
+We arrived at the matrix equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{C}\left\{ \phi(t+\Delta t)\right\} =-\mathbf{k}_{D}\left\{ \phi(t)\right\} \Delta t+\mathbf{C}\left\{ \phi(t)\right\} 
+\]
+
+\end_inset
+
+With the calculated matrices
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\mathbf{C} & =\left(c_{1}\int\mathbf{N}^{T}\mathbf{N}\,dA\right)=c_{1}\frac{A}{12}\left[\begin{array}{ccc}
+2 & 1 & 1\\
+1 & 2 & 1\\
+1 & 1 & 2
+\end{array}\right]\\
+\mathbf{k}_{D} & =\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\\
+ & =\frac{1}{4\left(A^{(e)}\right)^{2}}\int c_{2}\left[\begin{array}{ccc}
+a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
+a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\
+a_{3}a_{1} & a_{3}a_{2} & a_{3}^{2}
+\end{array}\right]+c_{3}\left[\begin{array}{ccc}
+b_{1}^{2} & b_{1}b_{2} & b_{1}b_{3}\\
+b_{2}b_{1} & b_{2}^{2} & b_{2}b_{3}\\
+b_{3}b_{1} & b_{3}b_{2} & b_{3}^{2}
+\end{array}\right]\,dA\\
+ & =\frac{1}{4A^{(e)}}\left(c_{2}\left[\begin{array}{ccc}
+a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
+a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\
+a_{3}a_{1} & a_{3}a_{2} & a_{3}^{2}
+\end{array}\right]+c_{3}\left[\begin{array}{ccc}
+b_{1}^{2} & b_{1}b_{2} & b_{1}b_{3}\\
+b_{2}b_{1} & b_{2}^{2} & b_{2}b_{3}\\
+b_{3}b_{1} & b_{3}b_{2} & b_{3}^{2}
+\end{array}\right]\right)
+\end{alignat*}
+
+\end_inset
+
+thus
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset space \hspace{}
+\length -1.5cm
+\end_inset
+
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{alignat*}{1}
+\mathbf{C}\left\{ \phi(t+\Delta t)\right\}  & =-\mathbf{k}_{D}\left\{ \phi(t)\right\} \Delta t+\mathbf{C}\left\{ \phi(t)\right\} \\
+c_{1}\frac{A}{12}\left[\begin{array}{ccc}
+2 & 1 & 1\\
+1 & 2 & 1\\
+1 & 1 & 2
+\end{array}\right]\left\{ \phi(t+\Delta t)\right\}  & =-\frac{\Delta t}{4A^{(e)}}\left(c_{2}\left[\begin{array}{ccc}
+a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
+a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\
+a_{3}a_{1} & a_{3}a_{2} & a_{3}^{2}
+\end{array}\right]+c_{3}\left[\begin{array}{ccc}
+b_{1}^{2} & b_{1}b_{2} & b_{1}b_{3}\\
+b_{2}b_{1} & b_{2}^{2} & b_{2}b_{3}\\
+b_{3}b_{1} & b_{3}b_{2} & b_{3}^{2}
+\end{array}\right]\right)\\
+ & +c_{1}\frac{A}{12}\left[\begin{array}{ccc}
+2 & 1 & 1\\
+1 & 2 & 1\\
+1 & 1 & 2
+\end{array}\right]\left\{ \phi(t)\right\} 
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
