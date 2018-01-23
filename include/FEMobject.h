@@ -43,7 +43,9 @@ private:
 
 public:
 	// Element manipulation functions.
+	FEMobject();
 	FEMobject(GeoData * geodata, elementType elmType, int objectDimensions);
+	void setObjectData(GeoData * geodata, elementType elmType, int objectDimensions);
 	FEMelement * element(int index);
 	void pushBackMatrixToAllElements(DenseMatrix m, std::string str);
 	int getNumberOfElements();
@@ -62,7 +64,7 @@ private:
 	std::vector<int> tempDoF;
 
 	void calculateNormalandArea(int facenumber);
-	bool isBoundryElement(int facenumber);
+	bool isBoundaryElement(int facenumber);
 	void DoF(FEMelement* elm);
 };
 

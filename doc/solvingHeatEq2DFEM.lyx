@@ -350,7 +350,7 @@ Thus the second derivative for
  & +c_{3}\int\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\,dA-c_{3}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
 \\
  & =-\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
- & +\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}
+ & +\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}
 \end{alignat*}
 
 \end_inset
@@ -773,7 +773,7 @@ With the calculated matrices
 1 & 2 & 1\\
 1 & 1 & 2
 \end{array}\right]\\
-\mathbf{k}_{D} & =\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\\
+\mathbf{k}_{D} & =\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\\
  & =\frac{1}{4\left(A^{(e)}\right)^{2}}\int c_{2}\left[\begin{array}{ccc}
 a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
 a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\

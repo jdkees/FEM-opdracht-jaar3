@@ -42,7 +42,7 @@ public:
 	void setNormal(DenseMatrix normal);
 	void setFacenumber(int n);
 	void setArea(double area);
-	void setBoundry(bool boundry);
+	void setBoundary(bool boundry);
 	void addVertex(int vertexNo, double* x, double* y, double* z);
 
 	DenseMatrix* 	 	getElementMatrix(std::string label);
@@ -53,7 +53,7 @@ public:
 	int				 	getFacenumber();
 	double				getArea();
 	int					getNumberOfMatrices();
-	bool				isBoundryElement();
+	bool				isBoundaryElement();
 	double				getX(int index);
 	double				getY(int index);
 	double				getZ(int index);

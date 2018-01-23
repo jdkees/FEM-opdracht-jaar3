@@ -257,7 +257,8 @@ src/FEM3.o: ../src/FEM3.cpp \
  /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
  /home/majernik/Programming/C++/FEM3/include/FEMelementcontainer.h \
  /home/majernik/Programming/C++/FEM3/include/ReadFromOBJ.h \
- /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h
+ /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h \
+ /home/majernik/Programming/C++/FEM3/include/FEMelement.h
 
 /home/majernik/Programming/C++/FEM3/examples/FEMmetal.h:
 
@@ -776,3 +777,5 @@ src/FEM3.o: ../src/FEM3.cpp \
 /home/majernik/Programming/C++/FEM3/include/ReadFromOBJ.h:
 
 /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h:
+
+/home/majernik/Programming/C++/FEM3/include/FEMelement.h:

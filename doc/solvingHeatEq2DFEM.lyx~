@@ -773,7 +773,7 @@ With the calculated matrices
 1 & 2 & 1\\
 1 & 1 & 2
 \end{array}\right]\\
-\mathbf{k}_{D} & =\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\\
+\mathbf{k}_{D} & =\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\\
  & =\frac{1}{4\left(A^{(e)}\right)^{2}}\int c_{2}\left[\begin{array}{ccc}
 a_{1}^{2} & a_{1}a_{2} & a_{1}a_{3}\\
 a_{2}a_{1} & a_{2}^{2} & a_{2}a_{3}\\
@@ -840,7 +840,7 @@ a_{3}a_{1} & a_{3}a_{2} & a_{3}^{2}
 b_{1}^{2} & b_{1}b_{2} & b_{1}b_{3}\\
 b_{2}b_{1} & b_{2}^{2} & b_{2}b_{3}\\
 b_{3}b_{1} & b_{3}b_{2} & b_{3}^{2}
-\end{array}\right]\right)\\
+\end{array}\right]\right)\left\{ \phi(t)\right\} \\
  & +c_{1}\frac{A}{12}\left[\begin{array}{ccc}
 2 & 1 & 1\\
 1 & 2 & 1\\

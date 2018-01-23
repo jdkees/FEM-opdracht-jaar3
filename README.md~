@@ -27,5 +27,10 @@ Nieuwe map "examples" gemaakt waar code komt waarbij we op een simpel object de 
 Nieuwe klasse gemaakt "FEMmetal" waarbij we de tijdsafhankelijke FEM testen op een vierkant stuk metaal.
 
 FEMmetal: berekenen van de C-matrix is geïmplementeerd.
+FEMmetal: berekenen van de Kd-matrix is geïmplementeerd.
+FEMmetal: invoeren van waarden op randen is geïmplementeerd.
+FEMmetal: Assembly van C, Kd is geïmplementeerd. Verder werken aan Ti en Ti+1.
+
+Typefout in solvingHeatEq2DFEM.pdf gecorrigeerd.
 
 

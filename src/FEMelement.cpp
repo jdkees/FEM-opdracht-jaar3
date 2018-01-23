@@ -42,7 +42,7 @@ void FEMelement::setArea(double area)
 	this->area = area;
 }
 
-void FEMelement::setBoundry(bool boundry)
+void FEMelement::setBoundary(bool boundry)
 {
 	boundryElement = boundry;
 }
@@ -88,7 +88,7 @@ double FEMelement::getArea()
 	return area;
 }
 
-bool FEMelement::isBoundryElement()
+bool FEMelement::isBoundaryElement()
 {
 	return boundryElement;
 }

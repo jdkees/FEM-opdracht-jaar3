@@ -7,6 +7,52 @@
 
 #include "FEMobject.h"
 
+FEMobject::FEMobject()
+{
+
+}
+
+void FEMobject::setObjectData(GeoData * geodata, elementType elmType, int objectDimensions)
+{
+	this->geodata = geodata;
+	this->elmType = elmType;
+	this->objectDimensions = objectDimensions;
+
+	// Set the nodesPerElement and DoF variables.
+	switch(elmType)
+	{
+	case elementType::LINEAR:
+		nodesPerElement = 2;
+		degreesOfFreedom = objectDimensions;
+		break;
+
+	case elementType::TRIANGLES:			// < --- These values might be incorrect.
+		nodesPerElement = 3;
+		degreesOfFreedom = objectDimensions;
+		break;
+
+	};
+
+	// Start parsing and creating element out of the GeoData.
+	int vertexNumber;
+	for(int i = 0; i < geodata->facesSize(); i++)
+	{
+		FEMelement * elm = new FEMelement;
+		elm->setFacenumber(i);
+		calculateNormalandArea(i);
+		elm->setNormal(tempNormal);
+		elm->setArea(tempArea);
+		elm->setBoundary(isBoundaryElement(i));
+
+		for(int j = 0; j < geodata->getFace(i)->size(); j++)
+		{
+			vertexNumber = geodata->getFace(i)->at(j) - 1;
+			elm->addVertex(vertexNumber, geodata->getX(vertexNumber), geodata->getY(vertexNumber), geodata->getZ(vertexNumber));
+		}
+		elmVector.push_back(elm);
+	}
+}
+
 FEMobject::FEMobject(GeoData* geodata, elementType elmType,
 		int objectDimensions) : geodata(geodata), elmType(elmType), objectDimensions(objectDimensions)
 {
@@ -34,7 +80,7 @@ FEMobject::FEMobject(GeoData* geodata, elementType elmType,
 		calculateNormalandArea(i);
 		elm->setNormal(tempNormal);
 		elm->setArea(tempArea);
-		elm->setBoundry(isBoundryElement(i));
+		elm->setBoundary(isBoundaryElement(i));
 
 		for(int j = 0; j < geodata->getFace(i)->size(); j++)
 		{
@@ -192,7 +238,7 @@ void FEMobject::calculateNormalandArea(int facenumber)
 	}
 }
 
-bool FEMobject::isBoundryElement(int facenumber)
+bool FEMobject::isBoundaryElement(int facenumber)
 {
 // Complex edge detection implementation here. Needs to be implemented.
 		return false;
