@@ -1,4 +1,8 @@
 src/FEM3.o: ../src/FEM3.cpp \
+ /home/majernik/Programming/C++/FEM3/examples/FEMmetal.h \
+ /home/majernik/Programming/C++/FEM3/include/FEMobject.h \
+ /home/majernik/Programming/C++/FEM3/include/GeoData.h \
+ /home/majernik/Programming/C++/FEM3/include/FEMelement.h \
  /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h \
  /home/majernik/Programming/C++/FEM3/include/Eigen/Dense \
  /home/majernik/Programming/C++/FEM3/include/Eigen/Core \
@@ -174,7 +178,94 @@ src/FEM3.o: ../src/FEM3.cpp \
  /home/majernik/Programming/C++/FEM3/include/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
  /home/majernik/Programming/C++/FEM3/include/Eigen/src/Eigenvalues/./RealQZ.h \
  /home/majernik/Programming/C++/FEM3/include/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
- /home/majernik/Programming/C++/FEM3/include/Calculus.h
+ /home/majernik/Programming/C++/FEM3/include/SparseMatrix.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/SparseCore \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseUtil.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMatrixBase.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/CommonCwiseUnaryOps.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/CommonCwiseBinaryOps.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/MatrixCwiseUnaryOps.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/MatrixCwiseBinaryOps.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/BlockMethods.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseAssign.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/CompressedStorage.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/AmbiVector.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCompressedBase.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMatrix.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMap.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/MappedSparseMatrix.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseVector.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseRef.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseTranspose.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseBlock.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDot.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseRedux.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseView.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseProduct.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDenseProduct.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseTriangularView.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/TriangularSolver.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparsePermutation.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseFuzzy.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSolverBase.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/Sparse \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/SparseCore \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/OrderingMethods \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Amd.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/../Core/util/NonMPL2.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Ordering.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/SparseCholesky \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/../Core/util/NonMPL2.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/SparseLU \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Structs.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLUImpl.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseColEtree.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Memory.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_pivotL.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_pruneL.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Utils.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/SparseQR \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseQR/SparseQR.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/IterativeLinearSolvers \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
+ /home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
+ /home/majernik/Programming/C++/FEM3/include/FEMelementcontainer.h \
+ /home/majernik/Programming/C++/FEM3/include/ReadFromOBJ.h \
+ /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h
+
+/home/majernik/Programming/C++/FEM3/examples/FEMmetal.h:
+
+/home/majernik/Programming/C++/FEM3/include/FEMobject.h:
+
+/home/majernik/Programming/C++/FEM3/include/GeoData.h:
+
+/home/majernik/Programming/C++/FEM3/include/FEMelement.h:
 
 /home/majernik/Programming/C++/FEM3/include/DenseMatrix.h:
 
@@ -526,4 +617,162 @@ src/FEM3.o: ../src/FEM3.cpp \
 
 /home/majernik/Programming/C++/FEM3/include/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h:
 
-/home/majernik/Programming/C++/FEM3/include/Calculus.h:
+/home/majernik/Programming/C++/FEM3/include/SparseMatrix.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/SparseCore:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseUtil.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMatrixBase.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/CommonCwiseUnaryOps.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/CommonCwiseBinaryOps.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/MatrixCwiseUnaryOps.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/MatrixCwiseBinaryOps.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/../plugins/BlockMethods.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseAssign.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/CompressedStorage.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/AmbiVector.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCompressedBase.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMatrix.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseMap.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/MappedSparseMatrix.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseVector.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseRef.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCwiseUnaryOp.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseCwiseBinaryOp.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseTranspose.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseBlock.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDot.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseRedux.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseView.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDiagonalProduct.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSparseProductWithPruning.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseProduct.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseDenseProduct.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSelfAdjointView.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseTriangularView.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/TriangularSolver.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparsePermutation.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseFuzzy.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseSolverBase.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/Sparse:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/SparseCore:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/OrderingMethods:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Amd.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/../Core/util/NonMPL2.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Ordering.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/OrderingMethods/Eigen_Colamd.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/SparseCholesky:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/SimplicialCholesky.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCholesky/../Core/util/NonMPL2.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/SparseLU:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_gemm_kernel.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Structs.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLUImpl.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseCore/SparseColEtree.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Memory.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_relax_snode.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_pivotL.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_panel_dfs.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_kernel_bmod.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_panel_bmod.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_column_dfs.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_column_bmod.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_pruneL.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU_Utils.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseLU/SparseLU.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/SparseQR:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/SparseQR/SparseQR.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/IterativeLinearSolvers:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h:
+
+/home/majernik/Programming/C++/FEM3/include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h:
+
+/home/majernik/Programming/C++/FEM3/include/FEMelementcontainer.h:
+
+/home/majernik/Programming/C++/FEM3/include/ReadFromOBJ.h:
+
+/home/majernik/Programming/C++/FEM3/include/DenseMatrix.h:

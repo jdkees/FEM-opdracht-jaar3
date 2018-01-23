@@ -43,10 +43,10 @@ private:
 
 public:
 	// Element manipulation functions.
-	virtual ~FEMobject();
 	FEMobject(GeoData * geodata, elementType elmType, int objectDimensions);
 	FEMelement * element(int index);
 	void pushBackMatrixToAllElements(DenseMatrix m, std::string str);
+	int getNumberOfElements();
 
 	// Global manipulation functions.
 	void addGlobalMatrix(int rows, int columns, std::string str);

@@ -17,3 +17,15 @@ En dan het commando:
 git push
 
 Voer je gebruikernaam in en wachtwoord. Succes!
+
+***********************- 23 jan 2017 -***********************
+Code gecontroleerd op berekenen van oppervlakte van elementen.
+Geen fouten gevonden.
+
+Nieuwe map "examples" gemaakt waar code komt waarbij we op een simpel object de FEM testen. 
+
+Nieuwe klasse gemaakt "FEMmetal" waarbij we de tijdsafhankelijke FEM testen op een vierkant stuk metaal.
+
+FEMmetal: berekenen van de C-matrix is geïmplementeerd.
+
+

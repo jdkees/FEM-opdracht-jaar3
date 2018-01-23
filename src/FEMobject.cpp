@@ -7,10 +7,6 @@
 
 #include "FEMobject.h"
 
-FEMobject::~FEMobject() {
-	// TODO Auto-generated destructor stub
-}
-
 FEMobject::FEMobject(GeoData* geodata, elementType elmType,
 		int objectDimensions) : geodata(geodata), elmType(elmType), objectDimensions(objectDimensions)
 {
@@ -35,6 +31,7 @@ FEMobject::FEMobject(GeoData* geodata, elementType elmType,
 	{
 		FEMelement * elm = new FEMelement;
 		elm->setFacenumber(i);
+		calculateNormalandArea(i);
 		elm->setNormal(tempNormal);
 		elm->setArea(tempArea);
 		elm->setBoundry(isBoundryElement(i));
@@ -83,6 +80,11 @@ SparseMatrix* FEMobject::global(std::string label)
 SparseMatrix* FEMobject::global(int index)
 {
 	return globalVec.at(index);
+}
+
+int FEMobject::getNumberOfElements()
+{
+	return elmVector.size();
 }
 
 void FEMobject::assemble(std::string strGlobal, std::string elementsName)
