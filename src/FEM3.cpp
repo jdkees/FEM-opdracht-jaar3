@@ -13,7 +13,8 @@ using namespace std;
 
 int main()
 {
-	FEMmetal test1(0.1);
+	FEMmetal metalBar(0.1, 5.0, 37);
+	metalBar.assemble();
 
 
 	std::cout << "=== FINISHED === "<< std::endl;

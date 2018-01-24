@@ -142,6 +142,8 @@ void FEMobject::assemble(std::string strGlobal, std::string elementsName)
 	double elMatrixRows = elmCont->matrixAt(0)->rows();
 	double globElementValue = 0;
 
+	std::cout<< "kut: " << elmCont->numberOfFoundElements() <<std::endl;
+
 	// Stiffness matrix assembly.
 	if(elMatrixColumns > 1)
 	{
@@ -247,12 +249,12 @@ bool FEMobject::isBoundaryElement(int facenumber)
 void FEMobject::DoF(FEMelement* elm)
 {
 	tempDoF.clear();
-	//std::cout << "Element" <<std::endl;
+	std::cout << "Element" <<std::endl;
 	for(int i = 0; i < elm->getVertexNumbers()->size(); i++)
 	{
 		for(int q = degreesOfFreedom-1; q >= 0; q--)
 		{
-			//std::cout << "Node#:" <<  (elm->getVertexNumbers()->at(i)+1) << " q:" << q << " n:" << DegreesOfFreedom << " DoF#: " << (elm->getVertexNumbers()->at(i)+1) * DegreesOfFreedom - q << std::endl;
+			std::cout << "Node#:" <<  (elm->getVertexNumbers()->at(i)+1) << " q:" << q << " n:" << degreesOfFreedom << " DoF#: " << (elm->getVertexNumbers()->at(i)+1) * degreesOfFreedom - q << std::endl;
 			tempDoF.push_back((elm->getVertexNumbers()->at(i)+1) * degreesOfFreedom - q);
 		}
 	}

@@ -25,6 +25,7 @@ private:
 
 	double timeStep;
 	double timeStop;
+	double T0;
 	double c1 = 1;
 	double c2 = 1;
 	double c3 = 1;
@@ -43,8 +44,8 @@ private:
 	void evalKDmatrix(int elementIndex);
 
 public:
-	FEMmetal(double timeStep);
-	void setTemperatureBoundaryNode(int elmIndex, int node, double temp);
+	FEMmetal(double timeStep, double timeStop, double T0);
+	void setTemperatureNode(int node, double temp);
 	void assemble();
 	virtual ~FEMmetal();
 };

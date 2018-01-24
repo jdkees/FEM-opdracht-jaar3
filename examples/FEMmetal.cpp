@@ -7,9 +7,11 @@
 
 #include "FEMmetal.h"
 
-FEMmetal::FEMmetal(double timeStep) : timeStep(timeStep)
+FEMmetal::FEMmetal(double timeStep, double timeStop, double T0) : timeStep(timeStep),
+					timeStop(timeStop), T0(T0)
 {
 	init();
+
 }
 
 FEMmetal::~FEMmetal() {
@@ -20,7 +22,7 @@ FEMmetal::~FEMmetal() {
 void FEMmetal::init()
 {
 	// Read and parse the .obj file.
-		ReadFromOBJ mesh("./3Dfiles/test.obj");
+		mesh.setFilepath("./3Dfiles/test.obj");
 		mesh.parse();
 
 	// Create a FEM object from the .obj file.
@@ -48,18 +50,13 @@ void FEMmetal::init()
 		{
 		// Calculate the C-matrix and add it to all elements.
 			DenseMatrix c;
-			c = C * object.element(i)->getArea() * (1/12.0) * c1;;
+			c = C * object.element(i)->getArea() * (1/12.0) * c1;
 			object.element(i)->addElementMatrix(c, "C");
+
 
 		// Calculate the KD-matrix and add it to all elements.
 			evalKDmatrix(i);
 			object.element(i)->addElementMatrix(Kd, "Kd");
-
-		// Create a Ti matrix for every element. This matrix may contain the values
-		// at the boundaries.
-			DenseMatrix Ti_e;
-			Ti_e.resize(3, 1);
-			object.element(i)->addElementMatrix(Ti_e, "Ti_e");
 		}
 
 		// Create the global T_i matrix.
@@ -72,14 +69,17 @@ void FEMmetal::init()
 		// Create the global Kd matrix.
 		object.addGlobalMatrix(mesh.verticesSize(), mesh.verticesSize(), "Kd");
 
+		// Fill the Ti matrix with the initial temperature.
+		for(int i = 1; i < mesh.verticesSize()+1; i++)
+		{
+			setTemperatureNode(i, T0);
+		}
 
 }
 
-void FEMmetal::setTemperatureBoundaryNode(int elmIndex, int node, double temp)
+void FEMmetal::setTemperatureNode(int node, double temp)
 {
-	object.element(elmIndex)->setBoundary(true);
-
-	object.element(elmIndex)->getElementMatrix("Ti_e")->setValue(temp, node, 1);
+	object.global("Ti")->setValue(temp, node, 1);
 }
 
 
@@ -137,12 +137,8 @@ void FEMmetal::assemble()
 {
 	// Assemble the element matrices "C" into the global "C" matrix.
 	object.assemble("C", "C");
-
 	// Assemble the element matrices "Kd" into the global "Kd" matrix.
-	object.assemble("Kd", "Kd");
-
-
-	// <<<<<<<<<< Hier straks verder werken.
+	//object.assemble("Kd", "Kd");
 }
 
 

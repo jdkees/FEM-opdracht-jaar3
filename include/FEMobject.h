@@ -23,6 +23,7 @@
 #include "FEMelementcontainer.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 enum elementType{LINEAR, TRIANGLES};
 

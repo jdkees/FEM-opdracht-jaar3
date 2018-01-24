@@ -33,4 +33,9 @@ FEMmetal: Assembly van C, Kd is geïmplementeerd. Verder werken aan Ti en Ti+1.
 
 Typefout in solvingHeatEq2DFEM.pdf gecorrigeerd.
 
+***********************- 24 jan 2017 -***********************
+FEMmetal: fouten opgelost. 
+FEMmetal: PROBLEEM!: ASSEMBLY WERKT NIET CORRECT!
+FEMmetal: Assembly subroutine moet herschreven worden want werkt niet voor 2D.
+
 
