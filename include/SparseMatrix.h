@@ -44,6 +44,10 @@ public:
 	void swapColumns(int col1, int col2);
 	SparseMatrix solve(SparseMatrix* B, sparseSolvers type);
 
+	// Operator overloading.
+	SparseMatrix operator+(const SparseMatrix& m2);
+	SparseMatrix operator*(const SparseMatrix& m2);
+
 	virtual ~SparseMatrix();
 };
 

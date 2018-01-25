@@ -66,7 +66,6 @@ private:
 
 	void calculateNormalandArea(int facenumber);
 	bool isBoundaryElement(int facenumber);
-	void DoF(FEMelement* elm);
 };
 
 #endif /* FEMOBJECT_H_ */

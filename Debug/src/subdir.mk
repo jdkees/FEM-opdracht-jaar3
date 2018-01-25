@@ -11,9 +11,11 @@ CPP_SRCS += \
 ../src/FEMelementcontainer.cpp \
 ../src/FEMobject.cpp \
 ../src/GeoData.cpp \
+../src/Interpolator.cpp \
 ../src/ReadFromOBJ.cpp \
 ../src/ScalarData.cpp \
 ../src/SparseMatrix.cpp \
+../src/TriangleInterpolation.cpp \
 ../src/VectorData.cpp 
 
 OBJS += \
@@ -24,9 +26,11 @@ OBJS += \
 ./src/FEMelementcontainer.o \
 ./src/FEMobject.o \
 ./src/GeoData.o \
+./src/Interpolator.o \
 ./src/ReadFromOBJ.o \
 ./src/ScalarData.o \
 ./src/SparseMatrix.o \
+./src/TriangleInterpolation.o \
 ./src/VectorData.o 
 
 CPP_DEPS += \
@@ -37,9 +41,11 @@ CPP_DEPS += \
 ./src/FEMelementcontainer.d \
 ./src/FEMobject.d \
 ./src/GeoData.d \
+./src/Interpolator.d \
 ./src/ReadFromOBJ.d \
 ./src/ScalarData.d \
 ./src/SparseMatrix.d \
+./src/TriangleInterpolation.d \
 ./src/VectorData.d 
 
 

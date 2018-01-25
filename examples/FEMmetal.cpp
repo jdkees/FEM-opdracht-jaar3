@@ -7,8 +7,8 @@
 
 #include "FEMmetal.h"
 
-FEMmetal::FEMmetal(double timeStep, double timeStop, double T0) : timeStep(timeStep),
-					timeStop(timeStop), T0(T0)
+FEMmetal::FEMmetal(double timeStep, double timeStop, double T0, std::string path) : timeStep(timeStep),
+					timeStop(timeStop), T0(T0), path(path)
 {
 	init();
 
@@ -22,7 +22,7 @@ FEMmetal::~FEMmetal() {
 void FEMmetal::init()
 {
 	// Read and parse the .obj file.
-		mesh.setFilepath("./3Dfiles/test.obj");
+		mesh.setFilepath(path);
 		mesh.parse();
 
 	// Create a FEM object from the .obj file.
@@ -138,9 +138,33 @@ void FEMmetal::assemble()
 	// Assemble the element matrices "C" into the global "C" matrix.
 	object.assemble("C", "C");
 	// Assemble the element matrices "Kd" into the global "Kd" matrix.
-	//object.assemble("Kd", "Kd");
+	object.assemble("Kd", "Kd");
+
+//	std::cout << "Element matrix C: \n" << object.element(1)->getElementMatrix("C")->matrix << std::endl;
+//	std::cout << "Global matrix C: \n" << object.global("C")->matrix << std::endl;
 }
 
+void FEMmetal::nextTimeStep()
+{
+	SparseMatrix interAdd;
+	SparseMatrix interMul;
+	interAdd = *object.global("Kd") + *object.global("C");
+	interMul = interAdd * *object.global("Ti");
+
+	// Solve matrix equation Ax=B.
+	*object.global("Ti+1") = object.global("C")->solve(&interMul, CHOLESKY);
+
+	// Ti will be assigned the values of Ti+1 for the next iteration.
+	*object.global("Ti") = *object.global("Ti+1");
+
+
+	//std::cout << object.global("Ti+1")->matrix << std::endl;
+}
+
+FEMobject* FEMmetal::getFEMobject()
+{
+	return &object;
+}
 
 
 

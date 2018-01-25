@@ -137,49 +137,71 @@ void FEMobject::assemble(std::string strGlobal, std::string elementsName)
 {
 	FEMelementcontainer * elmCont = new FEMelementcontainer(&elmVector, elementsName);
 	SparseMatrix* glob = global(strGlobal);
+	std::vector<int>* vertexNumbers;
 
 	double elMatrixColumns = elmCont->matrixAt(0)->columns();
 	double elMatrixRows = elmCont->matrixAt(0)->rows();
 	double globElementValue = 0;
 
-	std::cout<< "kut: " << elmCont->numberOfFoundElements() <<std::endl;
+	//std::cout<< "kut: " << glob->matrix <<std::endl;
 
 	// Stiffness matrix assembly.
 	if(elMatrixColumns > 1)
 	{
+		// Iterate through all the found element matrices with the given label.
 		for(int nElement = 0; nElement < elmCont->numberOfFoundElements(); nElement++)
 		{
-			DoF(elmCont->at(nElement));
+			DenseMatrix * m = elmCont->matrixAt(nElement);
+			vertexNumbers = elmCont->at(nElement)->getVertexNumbers();
 
-			for(int i = 0; i < tempDoF.size(); i++)
+			// Iterate through the matrix rows and columns.
+			for(int j = 1; j < elMatrixColumns+1; j++)
 			{
-				for(int j = 0; j < tempDoF.size(); j++)
+				for(int i = 1; i < elMatrixRows+1; i++)
 				{
-					globElementValue = glob->getValue(tempDoF.at(i), tempDoF.at(j));
-					globElementValue += elmCont->matrixAt(nElement)->getValue(i+1, j+1);
+					// Get value in global matrix and ass element value.
+					globElementValue = glob->getValue(vertexNumbers->at(i-1)+1, vertexNumbers->at(j-1)+1);
+					globElementValue = globElementValue + m->getValue(i, j);
 
-					glob->setValue(globElementValue, tempDoF.at(i), tempDoF.at(j));
+					glob->setValue(globElementValue,
+							vertexNumbers->at(i-1)+1,
+							vertexNumbers->at(j-1)+1);
 				}
 			}
+
+
+
+
+
+
+
+
 		}
 	}
-
 	// Force matrix assembly.
 	else
 	{
 		for(int nElement = 0; nElement < elmCont->numberOfFoundElements(); nElement++)
 		{
-			DoF(elmCont->at(nElement));
+			DenseMatrix * m = elmCont->matrixAt(nElement);
+			vertexNumbers = elmCont->at(nElement)->getVertexNumbers();
 
-			for(int i = 0; i < tempDoF.size(); i++)
+			// Iterate through the matrix rows and columns.
+			for(int i = 1; i < elMatrixRows+1; i++)
 			{
-				globElementValue = glob->getValue(tempDoF.at(i), 1);
-				globElementValue += elmCont->matrixAt(nElement)->getValue(i+1, 1);
+				// Get value in global matrix and ass element value.
+				globElementValue = glob->getValue(vertexNumbers->at(i-1)+1, 1);
+				globElementValue = globElementValue + m->getValue(i, 1);
 
-				glob->setValue(globElementValue, tempDoF.at(i), 1);
+				glob->setValue(globElementValue,
+						vertexNumbers->at(i-1)+1,
+						1);
 			}
 		}
 	}
+
+
+
 	glob->surpressNonzeros(0,0);
 }
 
@@ -244,20 +266,6 @@ bool FEMobject::isBoundaryElement(int facenumber)
 {
 // Complex edge detection implementation here. Needs to be implemented.
 		return false;
-}
-
-void FEMobject::DoF(FEMelement* elm)
-{
-	tempDoF.clear();
-	std::cout << "Element" <<std::endl;
-	for(int i = 0; i < elm->getVertexNumbers()->size(); i++)
-	{
-		for(int q = degreesOfFreedom-1; q >= 0; q--)
-		{
-			std::cout << "Node#:" <<  (elm->getVertexNumbers()->at(i)+1) << " q:" << q << " n:" << degreesOfFreedom << " DoF#: " << (elm->getVertexNumbers()->at(i)+1) * degreesOfFreedom - q << std::endl;
-			tempDoF.push_back((elm->getVertexNumbers()->at(i)+1) * degreesOfFreedom - q);
-		}
-	}
 }
 
 

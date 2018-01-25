@@ -37,5 +37,12 @@ Typefout in solvingHeatEq2DFEM.pdf gecorrigeerd.
 FEMmetal: fouten opgelost. 
 FEMmetal: PROBLEEM!: ASSEMBLY WERKT NIET CORRECT!
 FEMmetal: Assembly subroutine moet herschreven worden want werkt niet voor 2D.
+FEMmetal: Assembly subroutine herschreven. Geen foutmeldingen. Onduidelijk is of dit correct is.
+FEMmetal: Complete vergelijking in code geschreven. Onduidelijk is of het correct is.
+Interpolator: Begin schrijven aan de interpolator. 
+Interpolator: Klaar schrijven van klasse Interpolator. Klasse vormt basis voor overerving.
+TriangleInterpolation: Begin schrijven van de klasse. 
+TriangleInterpolation: Klasse is klaar. 
+Modelering van hitte vergelijking in metaal is klaar. De oplossing is NIET CORRECT! Morgen debuggen!!!
 
 

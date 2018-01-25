@@ -22,6 +22,7 @@ class FEMmetal
 private:
 	ReadFromOBJ mesh;
 	FEMobject object;
+	std::string path;
 
 	double timeStep;
 	double timeStop;
@@ -44,9 +45,11 @@ private:
 	void evalKDmatrix(int elementIndex);
 
 public:
-	FEMmetal(double timeStep, double timeStop, double T0);
+	FEMmetal(double timeStep, double timeStop, double T0, std::string path);
 	void setTemperatureNode(int node, double temp);
 	void assemble();
+	void nextTimeStep();
+	FEMobject* getFEMobject();
 	virtual ~FEMmetal();
 };
 

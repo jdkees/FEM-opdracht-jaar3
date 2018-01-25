@@ -72,11 +72,11 @@ SparseMatrix SparseMatrix::solve(SparseMatrix* B,
 	if(type == CHOLESKY)
 	{
 		Eigen::SimplicialCholesky<Eigen::SparseMatrix<double> > chol(matrix);
-		SparseMatrix x(B->rows(), 1);
+		SparseMatrix *x = new SparseMatrix(B->rows(), 1);
 
-		x.matrix = chol.solve(B->matrix);
+		x->matrix = chol.solve(B->matrix);
 
-		return x;
+		return *x;
 	}
 }
 
@@ -137,6 +137,23 @@ void SparseMatrix::swapColumns(int col1, int col2)
 void SparseMatrix::surpressNonzeros(double reference, double tolerance)
 {
 	matrix.prune(reference, tolerance);
+}
+
+// ------------- Operator overloading. -----------------------------------
+SparseMatrix SparseMatrix::operator+(const SparseMatrix& m2)
+{
+	SparseMatrix m;
+	m.matrix = this->matrix + m2.matrix;
+
+	return m;
+}
+
+SparseMatrix SparseMatrix::operator*(const SparseMatrix& m2)
+{
+	SparseMatrix m;
+	m.matrix = this->matrix * m2.matrix;
+
+	return m;
 }
 
 
