@@ -34,6 +34,8 @@ void FEMobject::setObjectData(GeoData * geodata, elementType elmType, int object
 	};
 
 	// Start parsing and creating element out of the GeoData.
+	std::cout << ">> Creating elements and calculating its area and normal."<< std::endl;
+	std::cout << "Progress: 00.0%"<< std::flush;
 	int vertexNumber;
 	for(int i = 0; i < geodata->facesSize(); i++)
 	{
@@ -50,7 +52,14 @@ void FEMobject::setObjectData(GeoData * geodata, elementType elmType, int object
 			elm->addVertex(vertexNumber, geodata->getX(vertexNumber), geodata->getY(vertexNumber), geodata->getZ(vertexNumber));
 		}
 		elmVector.push_back(elm);
+
+		std::cout << "\r"<< std::flush;
+		std::cout << "                  "<< std::flush;
+		std::cout << "\r"<< std::flush;
+		std::cout << "Progress: " << (double(i+1)/geodata->facesSize())*100 << "%" << std::flush;
 	}
+	std::cout <<std::endl;
+	std::cout << ">> Completed creating elements."<< std::endl;
 }
 
 FEMobject::FEMobject(GeoData* geodata, elementType elmType,
@@ -87,6 +96,7 @@ FEMobject::FEMobject(GeoData* geodata, elementType elmType,
 			vertexNumber = geodata->getFace(i)->at(j) - 1;
 			elm->addVertex(vertexNumber, geodata->getX(vertexNumber), geodata->getY(vertexNumber), geodata->getZ(vertexNumber));
 		}
+
 		elmVector.push_back(elm);
 	}
 }
@@ -153,6 +163,7 @@ void FEMobject::assemble(std::string strGlobal, std::string elementsName)
 		{
 			DenseMatrix * m = elmCont->matrixAt(nElement);
 			vertexNumbers = elmCont->at(nElement)->getVertexNumbers();
+
 
 			// Iterate through the matrix rows and columns.
 			for(int j = 1; j < elMatrixColumns+1; j++)

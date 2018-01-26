@@ -30,15 +30,33 @@ void TriangleInterpolation::P(double w1, double w2)
 
 double TriangleInterpolation::calculateScalar(int nElm)
 {
-	double sc = 0;
 
-	for(int i = 0; i < functionContainer.size(); i++)
-	{
-		sc = sc + functionContainer.at(i)( fem->element(nElm), mP.getValue(1,1), mP.getValue(2,1), mP.getValue(3,1) )
-				* fem->global(globalMatrixIndex)->getValue(
-						fem->element(nElm)->getVertexNumbers()->at(i)+1,
-						1);
-	}
+	double sc = 0;
+	int vertex1 = 0;
+	int vertex2 = 0;
+	int vertex3 = 0;
+	double T1 = 0;
+	double T2 = 0;
+	double T3 = 0;
+	double N1 = 0;
+	double N2 = 0;
+	double N3 = 0;
+
+
+	vertex1 = fem->element(nElm)->getVertexNumbers()->at(0)+1;
+	vertex2 = fem->element(nElm)->getVertexNumbers()->at(1)+1;
+	vertex3 = fem->element(nElm)->getVertexNumbers()->at(2)+1;
+
+	T1 = fem->global(globalMatrixIndex)->getValue(vertex1, 1);
+	T2 = fem->global(globalMatrixIndex)->getValue(vertex2, 1);
+	T3 = fem->global(globalMatrixIndex)->getValue(vertex3, 1);
+
+	N1 = functionContainer.at(0)( fem->element(nElm), mP.getValue(1,1), mP.getValue(2,1), mP.getValue(3,1) );
+	N2 = functionContainer.at(1)( fem->element(nElm), mP.getValue(1,1), mP.getValue(2,1), mP.getValue(3,1) );
+	N3 = functionContainer.at(2)( fem->element(nElm), mP.getValue(1,1), mP.getValue(2,1), mP.getValue(3,1) );
+
+
+	sc = N1*T1 + N2*T2 + N3*T3;
 
 	return sc;
 }
@@ -49,6 +67,9 @@ void TriangleInterpolation::interpolate(fieldType t)
 
 	if(t == SCALAR)
 	{
+		std::cout << ">> Start interpolating elements "<<std::endl;
+		std::cout << "Progress: 00.0%"<< std::flush;
+
 		// Iterate through all the elements in the object.
 		for(int nElm = 0; nElm < fem->getNumberOfElements(); nElm++ )
 		{
@@ -63,6 +84,11 @@ void TriangleInterpolation::interpolate(fieldType t)
 			C(1,1) = fem->element(nElm)->getX(2);
 			C(2,1) = fem->element(nElm)->getY(2);
 			C(3,1) = fem->element(nElm)->getZ(2);
+
+			std::cout << "\r"<< std::flush;
+			std::cout << "                  "<< std::flush;
+			std::cout << "\r"<< std::flush;
+			std::cout << "Progress: " << (double(nElm+1)/fem->getNumberOfElements())*100 << "%" << std::flush;
 
 			// Iterate through w1 and w2.
 			for(double w1 = 0; w1 < 1; w1=w1+dx)
@@ -87,8 +113,8 @@ void TriangleInterpolation::interpolate(fieldType t)
 			}
 		}
 
-
-
+		std::cout <<std::endl;
+		std::cout << ">> Completed interpolating elements." << std::endl;
 
 	}
 }

@@ -7,10 +7,9 @@
 
 #include "FEMmetal.h"
 
-FEMmetal::FEMmetal(double timeStep, double timeStop, double T0, std::string path) : timeStep(timeStep),
-					timeStop(timeStop), T0(T0), path(path)
+FEMmetal::FEMmetal(double timeStep, double T0, std::string path) : timeStep(timeStep),
+					T0(T0), path(path)
 {
-	init();
 
 }
 
@@ -46,6 +45,7 @@ void FEMmetal::init()
 		C(3,2) = 1;
 		C(3,3) = 2;
 
+
 		for(int i = 0; i < object.getNumberOfElements(); i++)
 		{
 		// Calculate the C-matrix and add it to all elements.
@@ -76,6 +76,15 @@ void FEMmetal::init()
 		}
 
 }
+
+void FEMmetal::setConstants(double specificHeat, double density,
+		double thermalConductivity)
+{
+	c1 = specificHeat * density;
+	c2 = thermalConductivity;
+	c3 = thermalConductivity;
+}
+
 
 void FEMmetal::setTemperatureNode(int node, double temp)
 {

@@ -12,9 +12,10 @@
 #define SPARSEMATRIX_H_
 #include <Eigen/SparseCore>
 #include <Eigen/Sparse>
+#include <iostream>
 //#include <vector>
 
-enum sparseSolvers {CHOLESKY};
+enum sparseSolvers {CHOLESKY, LEASTSQUARESCONJUGATEGRADIENT, BiCGSTAB};
 
 class SparseMatrix
 {
@@ -22,7 +23,6 @@ private:
 
 public:
 	Eigen::SparseMatrix<double> matrix;
-
 	SparseMatrix();
 	SparseMatrix(int i, int j);
 	void setSize(int i, int j);

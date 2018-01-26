@@ -25,7 +25,6 @@ private:
 	std::string path;
 
 	double timeStep;
-	double timeStop;
 	double T0;
 	double c1 = 1;
 	double c2 = 1;
@@ -41,16 +40,18 @@ private:
 	double b2;
 	double b3;
 
-	void init();
+
 	void evalKDmatrix(int elementIndex);
 
 public:
-	FEMmetal(double timeStep, double timeStop, double T0, std::string path);
+	FEMmetal(double timeStep, double T0, std::string path);
 	void setTemperatureNode(int node, double temp);
 	void assemble();
 	void nextTimeStep();
+	void setConstants(double specificHeat, double density, double thermalConductivity);
 	FEMobject* getFEMobject();
 	virtual ~FEMmetal();
+	void init();
 };
 
 #endif /* FEMMETAL_H_ */

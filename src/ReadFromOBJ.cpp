@@ -31,6 +31,8 @@ void ReadFromOBJ::setFilepath(std::string path)
 
 void ReadFromOBJ::parse()
 {
+	std::cout<< ">> Start parsing: \"" << filepath << "\"." << std::endl;
+
 	std::ifstream file(filepath.c_str());
 	std::string str;
 
@@ -54,6 +56,7 @@ void ReadFromOBJ::parse()
 		throw std::runtime_error("Can not open file "+filepath+" or does not exist.");
 	}
 
+	std::cout<< ">> Completed parsing: \"" << filepath << "\"." << std::endl;
 }
 
 void ReadFromOBJ::processVertex(std::string str)

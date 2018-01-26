@@ -13,6 +13,7 @@
 #define READFROMOBJ_H_
 #include "GeoData.h"
 #include <string>
+#include <iostream>
 
 class ReadFromOBJ: public GeoData
 {

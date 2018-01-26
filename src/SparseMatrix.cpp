@@ -71,10 +71,38 @@ SparseMatrix SparseMatrix::solve(SparseMatrix* B,
 {
 	if(type == CHOLESKY)
 	{
+		//std::cout << ">> Solving global matrix equation [A]{x}=[B]"<<std::endl;
+		//std::cout << "   -Dimensions matrix [A]: " << this->rows() << "X" << this->columns() <<std::endl;
+		//std::cout << "   -Dimensions matrix [B]: " << B->rows() << "X" << B->columns() <<std::endl;
+		//std::cout << "   -Solving method: CHOLESKY"<<std::endl;
+
 		Eigen::SimplicialCholesky<Eigen::SparseMatrix<double> > chol(matrix);
 		SparseMatrix *x = new SparseMatrix(B->rows(), 1);
 
 		x->matrix = chol.solve(B->matrix);
+
+		//std::cout << ">> Completed solving global matrix."<<std::endl;
+		return *x;
+	}else if(type == LEASTSQUARESCONJUGATEGRADIENT)
+	{
+
+		Eigen::LeastSquaresConjugateGradient<Eigen::SparseMatrix<double> > lscg;
+		SparseMatrix *x = new SparseMatrix(B->rows(), 1);
+
+		lscg.compute(matrix);
+		x->matrix = lscg.solve(B->matrix);
+
+		return *x;
+	}else if(type == BiCGSTAB)
+	{
+		Eigen::initParallel();
+		Eigen::setNbThreads(4);
+
+		Eigen::BiCGSTAB<Eigen::SparseMatrix<double> > solver;
+		SparseMatrix *x = new SparseMatrix(B->rows(), 1);
+
+		solver.compute(matrix);
+		x->matrix = solver.solve(B->matrix);
 
 		return *x;
 	}

@@ -13,6 +13,7 @@
 
 #include "Interpolator.h"
 #include "DenseMatrix.h"
+#include <iostream>
 
 class TriangleInterpolation : public Interpolator
 {

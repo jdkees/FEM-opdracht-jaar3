@@ -350,7 +350,7 @@ Thus the second derivative for
  & +c_{3}\int\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\,dA-c_{3}\int_{\Gamma}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
 \\
  & =-\int_{\Gamma}c_{2}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}\cos\theta+c_{3}\mathbf{N}^{T}\frac{\partial\mathbf{N}}{\partial y}\phi^{(e)}\sin\theta\,d\Gamma\\
- & +\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}\phi^{(e)}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}
+ & +\left(\int c_{2}\frac{\partial\mathbf{N}^{T}}{\partial x}\frac{\partial\mathbf{N}}{\partial x}+c_{3}\frac{\partial\mathbf{N}^{T}}{\partial y}\frac{\partial\mathbf{N}}{\partial y}\,dA\right)\phi^{(e)}
 \end{alignat*}
 
 \end_inset

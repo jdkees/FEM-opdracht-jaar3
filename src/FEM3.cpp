@@ -6,6 +6,9 @@
 // Description : This is the main cpp file.
 //============================================================================
 
+
+
+
 #include <iostream>
 #include "FEMmetal.h"
 #include "FEMelement.h"
@@ -63,7 +66,7 @@ double N3(FEMelement * elm, double x, double y, double z)
 	double y3 = elm->getY(2);
 
 	ans = ( 1.0/(2.0*elm->getArea()) )
-			*(      (x1*y2-x1*y1)+
+			*(      (x1*y2-x2*y1)+
 					(y1-y2)*x+
 					(x2-x1)*y);
 
@@ -73,17 +76,48 @@ double N3(FEMelement * elm, double x, double y, double z)
 
 int main()
 {
-	FEMmetal metalBar(0.1, 5.0, 37.0, "./3Dfiles/test.obj");
-	metalBar.setTemperatureNode(1, 100.0);
-	metalBar.assemble();
-	metalBar.nextTimeStep();
-	metalBar.nextTimeStep();
-	metalBar.nextTimeStep();
-	metalBar.nextTimeStep();
-	metalBar.nextTimeStep();
-	metalBar.nextTimeStep();
+	FEMmetal metalBar(1.0, 37.0, "./3Dfiles/test4.obj");
 
-	std:: cout << metalBar.getFEMobject()->global("Ti+1")->matrix << std::endl;
+	metalBar.setConstants(900, 2700, 230);
+	metalBar.init();
+
+	metalBar.setTemperatureNode(1, 100.0);
+	metalBar.setTemperatureNode(123, 100.0);
+	metalBar.setTemperatureNode(2, 100.0);
+	metalBar.setTemperatureNode(128, 100.0);
+	metalBar.setTemperatureNode(3, 100.0);
+	metalBar.setTemperatureNode(132, 100.0);
+	metalBar.setTemperatureNode(4, 100.0);
+	metalBar.setTemperatureNode(136, 100.0);
+	metalBar.setTemperatureNode(5, 100.0);
+
+	metalBar.assemble();
+
+	std::cout << ">> Start performing finite difference." <<std::endl;
+	std::cout << "Progress: 00.0%" << std::flush;
+	int maxIterations = 1;
+	for(int i = 0; i < maxIterations; i++)
+	{
+		metalBar.nextTimeStep();
+		metalBar.setTemperatureNode(1, 100.0);
+		metalBar.setTemperatureNode(123, 100.0);
+		metalBar.setTemperatureNode(2, 100.0);
+		metalBar.setTemperatureNode(128, 100.0);
+		metalBar.setTemperatureNode(3, 100.0);
+		metalBar.setTemperatureNode(132, 100.0);
+		metalBar.setTemperatureNode(4, 100.0);
+		metalBar.setTemperatureNode(136, 100.0);
+		metalBar.setTemperatureNode(5, 100.0);
+
+		std::cout << "\r" << std::flush;
+		std::cout << "                       "<< std::flush;
+		std::cout << "\r"<< std::flush;
+		std::cout << "Progress: " << (double(i+1)/maxIterations)*100 << "%" <<std::flush;
+	}
+	std::cout <<std::endl;
+	std::cout << ">> Completed finite difference."<< std::endl;
+
+	//std:: cout << metalBar.getFEMobject()->global("Ti+1")->matrix << std::endl;
 
 	// Interpolate values inside the elements.
 	TriangleInterpolation inter(metalBar.getFEMobject(), 0.1, 0.1, 0.1, 1);
@@ -94,6 +128,8 @@ int main()
 
 	// Save the ScalarData class as .CSV file.
 	inter.getScalarData()->saveAsCSVfile("kut.CSV");
+
+
 
 
 
