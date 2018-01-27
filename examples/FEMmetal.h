@@ -40,7 +40,9 @@ private:
 	double b2;
 	double b3;
 
-
+	// Temp matrices during evaluation.
+	SparseMatrix interAdd;
+	SparseMatrix interMul;
 	void evalKDmatrix(int elementIndex);
 
 public:

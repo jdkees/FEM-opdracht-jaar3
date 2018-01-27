@@ -76,9 +76,11 @@ double N3(FEMelement * elm, double x, double y, double z)
 
 int main()
 {
+	cout.precision(4);
+
 	FEMmetal metalBar(1.0, 37.0, "./3Dfiles/test4.obj");
 
-	metalBar.setConstants(900, 2700, 230);
+	metalBar.setConstants(90, 2700, 230); 		// Terug zetten naar originele waarde van 900.
 	metalBar.init();
 
 	metalBar.setTemperatureNode(1, 100.0);
@@ -91,28 +93,69 @@ int main()
 	metalBar.setTemperatureNode(136, 100.0);
 	metalBar.setTemperatureNode(5, 100.0);
 
+	metalBar.setTemperatureNode(201, -80);
+	metalBar.setTemperatureNode(36, -80.0);
+	metalBar.setTemperatureNode(203, -80.0);
+	metalBar.setTemperatureNode(37, -80.0);
+	metalBar.setTemperatureNode(202, -80.0);
+	metalBar.setTemperatureNode(26, -80.0);
+	metalBar.setTemperatureNode(172, -80.0);
+	metalBar.setTemperatureNode(25, -80.0);
+	metalBar.setTemperatureNode(199, -80.0);
+
+	metalBar.setTemperatureNode(62, 500.0);
+	metalBar.setTemperatureNode(63, 500.0);
+	metalBar.setTemperatureNode(273, 500.0);
+	metalBar.setTemperatureNode(275, 500.0);
+	metalBar.setTemperatureNode(276, 500.0);
+	metalBar.setTemperatureNode(277, 500.0);
+	metalBar.setTemperatureNode(304, 500.0);
+	metalBar.setTemperatureNode(307, 500.0);
+	metalBar.setTemperatureNode(306, 500.0);
+
+
 	metalBar.assemble();
 
 	std::cout << ">> Start performing finite difference." <<std::endl;
 	std::cout << "Progress: 00.0%" << std::flush;
-	int maxIterations = 1;
+	int maxIterations = 10000;
 	for(int i = 0; i < maxIterations; i++)
 	{
 		metalBar.nextTimeStep();
-		metalBar.setTemperatureNode(1, 100.0);
-		metalBar.setTemperatureNode(123, 100.0);
-		metalBar.setTemperatureNode(2, 100.0);
-		metalBar.setTemperatureNode(128, 100.0);
-		metalBar.setTemperatureNode(3, 100.0);
-		metalBar.setTemperatureNode(132, 100.0);
-		metalBar.setTemperatureNode(4, 100.0);
-		metalBar.setTemperatureNode(136, 100.0);
-		metalBar.setTemperatureNode(5, 100.0);
+		metalBar.setTemperatureNode(1, 500.0);
+		metalBar.setTemperatureNode(123, 500.0);
+		metalBar.setTemperatureNode(2, 500.0);
+		metalBar.setTemperatureNode(128, 500.0);
+		metalBar.setTemperatureNode(3, 500.0);
+		metalBar.setTemperatureNode(132, 500.0);
+		metalBar.setTemperatureNode(4, 500.0);
+		metalBar.setTemperatureNode(136, 500.0);
+		metalBar.setTemperatureNode(5, 500.0);
+
+		metalBar.setTemperatureNode(201, -80.0);
+		metalBar.setTemperatureNode(36, -80.0);
+		metalBar.setTemperatureNode(203, -80.0);
+		metalBar.setTemperatureNode(37, -80.0);
+		metalBar.setTemperatureNode(202, -80.0);
+		metalBar.setTemperatureNode(26, -80.0);
+		metalBar.setTemperatureNode(172, -80.0);
+		metalBar.setTemperatureNode(25, -80.0);
+		metalBar.setTemperatureNode(199, -80.0);
+
+		metalBar.setTemperatureNode(62, 500.0);
+		metalBar.setTemperatureNode(63, 500.0);
+		metalBar.setTemperatureNode(273, 500.0);
+		metalBar.setTemperatureNode(275, 500.0);
+		metalBar.setTemperatureNode(276, 500.0);
+		metalBar.setTemperatureNode(277, 500.0);
+		metalBar.setTemperatureNode(304, 500.0);
+		metalBar.setTemperatureNode(307, 500.0);
+		metalBar.setTemperatureNode(306, 500.0);
 
 		std::cout << "\r" << std::flush;
 		std::cout << "                       "<< std::flush;
 		std::cout << "\r"<< std::flush;
-		std::cout << "Progress: " << (double(i+1)/maxIterations)*100 << "%" <<std::flush;
+		std::cout << "Progress: " << (double(i+1)/maxIterations)*100.000 << "%" <<std::flush;
 	}
 	std::cout <<std::endl;
 	std::cout << ">> Completed finite difference."<< std::endl;
@@ -120,7 +163,7 @@ int main()
 	//std:: cout << metalBar.getFEMobject()->global("Ti+1")->matrix << std::endl;
 
 	// Interpolate values inside the elements.
-	TriangleInterpolation inter(metalBar.getFEMobject(), 0.1, 0.1, 0.1, 1);
+	TriangleInterpolation inter(metalBar.getFEMobject(), 0.1, 0.1, 0.1, 0);
 	inter.addShapeFunction(N1);
 	inter.addShapeFunction(N2);
 	inter.addShapeFunction(N3);

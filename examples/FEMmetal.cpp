@@ -149,15 +149,12 @@ void FEMmetal::assemble()
 	// Assemble the element matrices "Kd" into the global "Kd" matrix.
 	object.assemble("Kd", "Kd");
 
-//	std::cout << "Element matrix C: \n" << object.element(1)->getElementMatrix("C")->matrix << std::endl;
-//	std::cout << "Global matrix C: \n" << object.global("C")->matrix << std::endl;
+	// Calculate intermediate.
+	interAdd = *object.global("Kd") + *object.global("C");
 }
 
 void FEMmetal::nextTimeStep()
 {
-	SparseMatrix interAdd;
-	SparseMatrix interMul;
-	interAdd = *object.global("Kd") + *object.global("C");
 	interMul = interAdd * *object.global("Ti");
 
 	// Solve matrix equation Ax=B.
@@ -167,7 +164,7 @@ void FEMmetal::nextTimeStep()
 	*object.global("Ti") = *object.global("Ti+1");
 
 
-	//std::cout << object.global("Ti+1")->matrix << std::endl;
+	delete object.global("Ti+1");
 }
 
 FEMobject* FEMmetal::getFEMobject()

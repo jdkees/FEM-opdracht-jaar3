@@ -187,6 +187,6 @@ SparseMatrix SparseMatrix::operator*(const SparseMatrix& m2)
 
 SparseMatrix::~SparseMatrix()
 {
-	// TODO Auto-generated destructor stub
+
 }
 
