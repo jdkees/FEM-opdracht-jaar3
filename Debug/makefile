@@ -45,15 +45,20 @@ all: FEM3
 FEM3: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++ -fopenmp -o "FEM3" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L/usr/x86_64-linux-gnu -fopenmp -o "FEM3" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
+	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
 	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(C_DEPS)$(CPP_DEPS) FEM3
 	-@echo ' '
 
-.PHONY: all clean dependents
+post-build:
+	-cp /home/majernik/Programming/C++/FEM3/Debug/FEM3 /home/majernik/Programming/C++/FEM3/
+	-@echo ' '
+
+.PHONY: all clean dependents post-build
 
 -include ../makefile.targets

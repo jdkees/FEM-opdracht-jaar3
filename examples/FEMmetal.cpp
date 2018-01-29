@@ -164,12 +164,18 @@ void FEMmetal::nextTimeStep()
 	*object.global("Ti") = *object.global("Ti+1");
 
 
-	delete object.global("Ti+1");
+	//delete object.global("Ti+1");
 }
 
 FEMobject* FEMmetal::getFEMobject()
 {
 	return &object;
+}
+
+
+GeoData* FEMmetal::getMesh()
+{
+	return &mesh;
 }
 
 

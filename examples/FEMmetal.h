@@ -52,6 +52,7 @@ public:
 	void nextTimeStep();
 	void setConstants(double specificHeat, double density, double thermalConductivity);
 	FEMobject* getFEMobject();
+	GeoData* getMesh();
 	virtual ~FEMmetal();
 	void init();
 };

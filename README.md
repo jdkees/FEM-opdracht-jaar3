@@ -49,4 +49,14 @@ Modelering van hitte vergelijking in metaal is klaar. De oplossing is NIET CORRE
 Start debugging. Is mijn uitwerking correct? Onzekerheid over de boundary matrix die ik heb gelijkgesteld aan 0. Voor de rest geen fouten kunnen opsporen. Start controleren FEMmetal class. Geen fouten kunnen vinden in FEMmetal class. Start van controle van convergentie van test.obj wanneer t naar oneindig gaat. test.obj convergeert naar de juiste waarde rond 50 000 seconden. Het lijkt te werken voor test.obj. Voor mesh.obj gaat het fout.
 Start controleren Interpolator class en TriangleInterpolator class. Interpolator lijkt geen fouten te hebben. FOUT GEVONDEN!!! Na een hele dag te hebben verneukt aan het vinden van een fout in mijn code komt het er op neer dat de interpolatiefunctie N3 in het boek een typefout heeft. Deze komt voort uit het boek van stinkhoer Quek. Fout is aangepast in solvingHeatEq2DFEM.pdf en in de code en werkt nu correct. Code getest vlakken met hoger aantal aan elementen. Dit is gelukt. Echter is de tijd die ervoor nodig is voor fatsoanlijke convergentie behoorlijk hoog. Constanten niet juist??? Morgen: garbage collecting (RAM gehuigen raakt overbodig vol) en code efficienter maken. Nieuwe map "plots" gemaakt.
 
+***********************- 26 jan 2017 -***********************
+Garbage collecting gedaan voor een klein deel. Code iets wat efficienter gemaakt. Status in procenten toegevoegd.
+
+***********************- 27 jan 2017 -***********************
+Simulatie van andere vormen. Garbage collecting ongedaan gemaakt vanwege errors.
+
+***********************- 28 jan 2017 -***********************
+Samenvoegen van Pythoncode met C++. Pythoncode aangepast. Plotjes gemaakt van verschillende vormen.
+ReadFromOBJ aangepast om backslash te negeren in .obj bestanden. Process van plotten geautomatiseerd. 
+
 

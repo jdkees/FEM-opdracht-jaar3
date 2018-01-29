@@ -22,6 +22,7 @@ private:
 
 	void processVertex(std::string str);
 	void processFace(std::string str);
+	std::string ignoreSlash(std::string str);
 public:
 	ReadFromOBJ();
 	ReadFromOBJ(std::string path);

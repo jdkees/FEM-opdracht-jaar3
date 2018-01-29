@@ -53,7 +53,7 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -std=c++0x -I/home/majernik/Programming/C++/FEM3/include/Eigen -I/home/majernik/Programming/C++/FEM3/include -I"/home/majernik/Programming/C++/FEM3/examples" -O0 -g3 -Wall -c -fmessage-length=0 -fopenmp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -std=c++0x -I/home/majernik/Programming/C++/FEM3/include/Eigen -I/usr/include/python2.7 -I/home/majernik/Programming/C++/FEM3/include -I"/home/majernik/Programming/C++/FEM3/examples" -O0 -g3 -Wall -c -fmessage-length=0 -fopenmp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

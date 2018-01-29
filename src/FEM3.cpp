@@ -13,6 +13,7 @@
 #include "FEMmetal.h"
 #include "FEMelement.h"
 #include "TriangleInterpolation.h"
+#include "PythonPlot.h"
 using namespace std;
 
 // Defining shape functions.
@@ -76,13 +77,73 @@ double N3(FEMelement * elm, double x, double y, double z)
 
 int main()
 {
+	std::string filename = "test8";
+	int maxIterations = 500;
+	double timeStep = 1.0;
 	cout.precision(4);
 
-	FEMmetal metalBar(1.0, 37.0, "./3Dfiles/test4.obj");
 
-	metalBar.setConstants(90, 2700, 230); 		// Terug zetten naar originele waarde van 900.
+	// Simulate the time-dependent heat equation in 2D for a metal without convection.
+	FEMmetal metalBar(timeStep, 37.0, "./3Dfiles/"+filename+".obj");
+
+	metalBar.setConstants(900, 2700, 230); 		// Terug zetten naar originele waarde van 900, 2700, 230.
 	metalBar.init();
 
+
+
+	//  Nodal values for test5.obj
+	metalBar.setTemperatureNode(101, 100.0);
+	metalBar.assemble();
+
+	std::cout << ">> Start performing finite difference." <<std::endl;
+	std::cout << "Progress: 00.0%" << std::flush;
+
+	for(int i = 0; i < maxIterations; i++)
+	{
+		metalBar.nextTimeStep();
+		//  Nodal values for test5.obj
+		metalBar.setTemperatureNode(101, 100.0);
+
+		// Pretty printing status.
+		std::cout << "\r" << std::flush;
+		std::cout << "                       "<< std::flush;
+		std::cout << "\r"<< std::flush;
+		std::cout << "Progress: " << (double(i+1)/maxIterations)*100.000 << "%" <<std::flush;
+	}
+	std::cout <<std::endl;
+	std::cout << ">> Completed finite difference."<< std::endl;
+
+
+	// Interpolate values inside the elements.
+	TriangleInterpolation inter(metalBar.getFEMobject(), 0.1, 0.1, 0.1, 0);
+	inter.addShapeFunction(N1);
+	inter.addShapeFunction(N2);
+	inter.addShapeFunction(N3);
+	inter.interpolate(SCALAR);
+
+	// Save the ScalarData class as .CSV file.
+	inter.getScalarData()->saveAsCSVfile("plots/"+filename + "-" + std::to_string(maxIterations*timeStep)+".csv");
+
+	// Plot the data with the Python wrapper.
+	PythonPlot py;
+	py.setPath("/home/majernik/Programming/C++/FEM3/python", "plot");
+	py.selectFuntionByName("plotfile", 2);
+	py.appendArgument(PyString_FromString(std::string("plots/"+filename + "-" + std::to_string(maxIterations*timeStep)).c_str()));
+	py.appendArgument(PyString_FromString(std::string( filename + "-" + std::to_string(maxIterations*timeStep) ).c_str()));
+	py.callFunction();
+
+
+
+
+
+
+
+	std::cout << "=== FINISHED === "<< std::endl;
+	return 0;
+}
+
+
+/*  values for test4.obj
 	metalBar.setTemperatureNode(1, 100.0);
 	metalBar.setTemperatureNode(123, 100.0);
 	metalBar.setTemperatureNode(2, 100.0);
@@ -112,72 +173,20 @@ int main()
 	metalBar.setTemperatureNode(304, 500.0);
 	metalBar.setTemperatureNode(307, 500.0);
 	metalBar.setTemperatureNode(306, 500.0);
+*/
+
+/*
+ //  values for test5.obj
+	metalBar.setTemperatureNode(22, 100.0);
+	metalBar.setTemperatureNode(23, 100.0);
+	metalBar.setTemperatureNode(24, 100.0);
+	metalBar.setTemperatureNode(57, 100.0);
+	metalBar.setTemperatureNode(61, 100.0);
+	metalBar.setTemperatureNode(240, 100.0);
+	metalBar.setTemperatureNode(244, 100.0);
+	metalBar.setTemperatureNode(250, 100.0);
+	metalBar.setTemperatureNode(253, 100.0);
 
 
-	metalBar.assemble();
+ */
 
-	std::cout << ">> Start performing finite difference." <<std::endl;
-	std::cout << "Progress: 00.0%" << std::flush;
-	int maxIterations = 10000;
-	for(int i = 0; i < maxIterations; i++)
-	{
-		metalBar.nextTimeStep();
-		metalBar.setTemperatureNode(1, 500.0);
-		metalBar.setTemperatureNode(123, 500.0);
-		metalBar.setTemperatureNode(2, 500.0);
-		metalBar.setTemperatureNode(128, 500.0);
-		metalBar.setTemperatureNode(3, 500.0);
-		metalBar.setTemperatureNode(132, 500.0);
-		metalBar.setTemperatureNode(4, 500.0);
-		metalBar.setTemperatureNode(136, 500.0);
-		metalBar.setTemperatureNode(5, 500.0);
-
-		metalBar.setTemperatureNode(201, -80.0);
-		metalBar.setTemperatureNode(36, -80.0);
-		metalBar.setTemperatureNode(203, -80.0);
-		metalBar.setTemperatureNode(37, -80.0);
-		metalBar.setTemperatureNode(202, -80.0);
-		metalBar.setTemperatureNode(26, -80.0);
-		metalBar.setTemperatureNode(172, -80.0);
-		metalBar.setTemperatureNode(25, -80.0);
-		metalBar.setTemperatureNode(199, -80.0);
-
-		metalBar.setTemperatureNode(62, 500.0);
-		metalBar.setTemperatureNode(63, 500.0);
-		metalBar.setTemperatureNode(273, 500.0);
-		metalBar.setTemperatureNode(275, 500.0);
-		metalBar.setTemperatureNode(276, 500.0);
-		metalBar.setTemperatureNode(277, 500.0);
-		metalBar.setTemperatureNode(304, 500.0);
-		metalBar.setTemperatureNode(307, 500.0);
-		metalBar.setTemperatureNode(306, 500.0);
-
-		std::cout << "\r" << std::flush;
-		std::cout << "                       "<< std::flush;
-		std::cout << "\r"<< std::flush;
-		std::cout << "Progress: " << (double(i+1)/maxIterations)*100.000 << "%" <<std::flush;
-	}
-	std::cout <<std::endl;
-	std::cout << ">> Completed finite difference."<< std::endl;
-
-	//std:: cout << metalBar.getFEMobject()->global("Ti+1")->matrix << std::endl;
-
-	// Interpolate values inside the elements.
-	TriangleInterpolation inter(metalBar.getFEMobject(), 0.1, 0.1, 0.1, 0);
-	inter.addShapeFunction(N1);
-	inter.addShapeFunction(N2);
-	inter.addShapeFunction(N3);
-	inter.interpolate(SCALAR);
-
-	// Save the ScalarData class as .CSV file.
-	inter.getScalarData()->saveAsCSVfile("kut.CSV");
-
-
-
-
-
-
-
-	std::cout << "=== FINISHED === "<< std::endl;
-	return 0;
-}

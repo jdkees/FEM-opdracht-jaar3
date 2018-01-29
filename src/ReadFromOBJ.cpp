@@ -116,8 +116,9 @@ void ReadFromOBJ::processFace(std::string str)
 
     while (end != std::string::npos)
     {
-        face.push_back( std::stoi(s.substr(start, end - start), &sz) );
-        start = end + delim.length();
+        //face.push_back( std::stoi(s.substr(start, end - start), &sz) );
+    	face.push_back( std::stoi( ignoreSlash( s.substr(start, end - start) ), &sz) );
+    	start = end + delim.length();
         end = s.find(delim, start);
     }
     face.push_back( std::stoi(s.substr(start, end), &sz)  );
@@ -125,6 +126,20 @@ void ReadFromOBJ::processFace(std::string str)
 
     addFace(face);
 
+}
+
+std::string ReadFromOBJ::ignoreSlash(std::string str)
+{
+    std::string s = str;
+    std::string delim = "/";
+
+    std::size_t start = 0U;
+    std::size_t end = s.find(delim);
+    std::string::size_type sz;     // alias of size_t
+
+
+
+	return s.substr(start, end - start);
 }
 
 ReadFromOBJ::~ReadFromOBJ()
